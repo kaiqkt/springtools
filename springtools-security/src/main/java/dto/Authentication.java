@@ -56,4 +56,8 @@ public class Authentication implements org.springframework.security.core.Authent
     public String getName() {
         return "PRINCIPAL";
     }
+
+    public Map<String, Object> getData() {
+        return data;
+    }
 }
