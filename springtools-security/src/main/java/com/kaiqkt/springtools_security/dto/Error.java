@@ -1,6 +1,6 @@
-package dto;
+package com.kaiqkt.springtools_security.dto;
 
-import enums.ErrorType;
+import com.kaiqkt.springtools_security.enums.ErrorType;
 
 public class Error {
     private final ErrorType type;

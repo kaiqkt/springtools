@@ -1,8 +1,7 @@
-package configs;
+package com.kaiqkt.springtools_security.configs;
 
-import filters.AuthenticationFilter;
-import handlers.AuthenticationEntryPointImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kaiqkt.springtools_security.filters.AuthenticationFilter;
+import com.kaiqkt.springtools_security.handlers.AuthenticationEntryPointImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

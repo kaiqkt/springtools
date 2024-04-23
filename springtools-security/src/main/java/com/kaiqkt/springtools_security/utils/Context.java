@@ -1,6 +1,6 @@
-package utils;
+package com.kaiqkt.springtools_security.utils;
 
-import dto.Authentication;
+import com.kaiqkt.springtools_security.dto.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 

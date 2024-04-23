@@ -1,6 +1,6 @@
-package exceptions;
+package com.kaiqkt.springtools_security.exceptions;
 
-import enums.ErrorType;
+import com.kaiqkt.springtools_security.enums.ErrorType;
 import org.springframework.security.core.AuthenticationException;
 
 public class UnauthorizedException extends AuthenticationException {
