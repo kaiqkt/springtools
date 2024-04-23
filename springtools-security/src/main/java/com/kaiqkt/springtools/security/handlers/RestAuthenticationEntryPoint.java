@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component("restAuthenticationEntryPoint")
-public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
+public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {

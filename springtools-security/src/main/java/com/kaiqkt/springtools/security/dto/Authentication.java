@@ -13,12 +13,16 @@ import static com.kaiqkt.springtools.security.enums.Roles.ROLE_PUBLIC;
 public class Authentication implements org.springframework.security.core.Authentication {
 
     private final Map<String, Object> data;
-    private final String token;
+    private String token = "TOKEN";
     private Boolean authenticated = true;
 
     public Authentication(Map<String, Object> data, String token) {
         this.data = data;
         this.token = token;
+    }
+
+    public Authentication(Map<String, Object> data) {
+        this.data = data;
     }
 
     @Override
@@ -65,7 +69,6 @@ public class Authentication implements org.springframework.security.core.Authent
     public String toString() {
         return "Authentication{" +
                 "data=" + data +
-                ", token='" + token + '\'' +
                 ", authenticated=" + authenticated +
                 '}';
     }

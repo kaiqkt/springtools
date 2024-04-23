@@ -12,6 +12,7 @@ import com.kaiqkt.springtools.security.exceptions.UnauthorizedException;
 import com.kaiqkt.springtools.security.utils.AuthenticationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import static com.kaiqkt.springtools.security.enums.Roles.ROLE_API;
 import static com.kaiqkt.springtools.security.enums.Roles.ROLE_PUBLIC;
 
 @Component
+@EnableConfigurationProperties(AuthenticationProperties.class)
 public class AuthenticationHandler {
 
     private final AuthenticationProperties properties;
@@ -47,11 +49,13 @@ public class AuthenticationHandler {
     }
 
     public Authentication handleAccessToken(String token) {
+        System.out.println(token);
+        System.out.println(properties.getAccessToken());
         if (token.equals(properties.getAccessToken())) {
             Map<String, Object> data = new HashMap<>();
             data.put("role", ROLE_API.name());
 
-            return new Authentication(data, null);
+            return new Authentication(data);
         }
 
         throw new UnauthorizedException("Invalid Access Token", ErrorType.INVALID_TOKEN);
@@ -61,6 +65,6 @@ public class AuthenticationHandler {
         Map<String, Object> data = new HashMap<>();
         data.put("role", ROLE_PUBLIC.name());
 
-        return new Authentication(data, null);
+        return new Authentication(data);
     }
 }
