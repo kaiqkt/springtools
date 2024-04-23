@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -43,6 +44,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }  catch (AuthenticationException ex) {
             SecurityContextHolder.clearContext();
             authenticationEntryPoint.commence(request, response, ex);
+        } catch (AccessDeniedException ex) {
+            authenticationEntryPoint.handle(request, response, ex);
         }
     }
 

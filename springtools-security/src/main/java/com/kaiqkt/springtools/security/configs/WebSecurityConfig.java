@@ -19,12 +19,10 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter;
 public class WebSecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
-    private final RestAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
-    public WebSecurityConfig(AuthenticationFilter authenticationFilter, RestAuthenticationEntryPoint authenticationEntryPoint) {
+    public WebSecurityConfig(AuthenticationFilter authenticationFilter) {
         this.authenticationFilter = authenticationFilter;
-        this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
     @Bean
@@ -33,9 +31,6 @@ public class WebSecurityConfig {
         httpSecurity.cors(AbstractHttpConfigurer::disable);
         httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.securityMatchers(matchers -> matchers.requestMatchers(Companion.PATH_MATCHERS));
-        httpSecurity.exceptionHandling(handler ->
-                handler.accessDeniedHandler(authenticationEntryPoint).authenticationEntryPoint(authenticationEntryPoint)
-        );
         httpSecurity.authorizeHttpRequests(authRequest ->
                 authRequest.requestMatchers(Companion.PATH_MATCHERS).permitAll().anyRequest().authenticated()
         );
