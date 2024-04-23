@@ -1,8 +1,8 @@
 package com.kaiqkt.springtools.security.configs;
 
 import com.kaiqkt.springtools.security.filters.AuthenticationFilter;
+import com.kaiqkt.springtools.security.handlers.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
 
@@ -20,10 +19,12 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter;
 public class WebSecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
+    private final RestAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
-    public WebSecurityConfig(AuthenticationFilter authenticationFilter) {
+    public WebSecurityConfig(AuthenticationFilter authenticationFilter, RestAuthenticationEntryPoint authenticationEntryPoint) {
         this.authenticationFilter = authenticationFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
     @Bean
@@ -32,6 +33,9 @@ public class WebSecurityConfig {
         httpSecurity.cors(AbstractHttpConfigurer::disable);
         httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.securityMatchers(matchers -> matchers.requestMatchers(Companion.PATH_MATCHERS));
+        httpSecurity.exceptionHandling(handler ->
+                handler.accessDeniedHandler(authenticationEntryPoint).authenticationEntryPoint(authenticationEntryPoint)
+        );
         httpSecurity.authorizeHttpRequests(authRequest ->
                 authRequest.requestMatchers(Companion.PATH_MATCHERS).permitAll().anyRequest().authenticated()
         );
