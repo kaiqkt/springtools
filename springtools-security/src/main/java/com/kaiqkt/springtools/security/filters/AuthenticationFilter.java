@@ -45,6 +45,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.clearContext();
             authenticationEntryPoint.commence(request, response, ex);
         } catch (AccessDeniedException ex) {
+            System.out.println("access denied");
             authenticationEntryPoint.handle(request, response, ex);
         }
     }

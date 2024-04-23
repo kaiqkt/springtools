@@ -41,6 +41,6 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint, A
 
         response.setContentType("application/json");
         response.getWriter().write(error.toString());
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setStatus(HttpStatus.FORBIDDEN.value());
     }
 }
