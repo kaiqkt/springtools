@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static enums.Roles.ROLE_API;
+import static enums.Roles.ROLE_PUBLIC;
 
 @Component
 public class AuthenticationHandler {
@@ -50,7 +51,7 @@ public class AuthenticationHandler {
     public Authentication handleAccessToken(String token) {
         if (token.equals(accessSecret)) {
             Map<String, Object> data = new HashMap<>();
-            data.put("role", ROLE_API);
+            data.put("role", ROLE_API.name());
 
             return new Authentication(data, null);
         }
@@ -60,10 +61,8 @@ public class AuthenticationHandler {
 
     public Authentication handlePublic(){
         Map<String, Object> data = new HashMap<>();
-        data.put("role", ROLE_API);
+        data.put("role", ROLE_PUBLIC.name());
 
         return new Authentication(data, null);
     }
 }
-
-

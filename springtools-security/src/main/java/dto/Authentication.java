@@ -23,7 +23,7 @@ public class Authentication implements org.springframework.security.core.Authent
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String role = (String) Optional.ofNullable(data.get("role")).orElse(ROLE_PUBLIC.toString());
+        String role = (String) Optional.ofNullable(data.get("role")).orElse(ROLE_PUBLIC.name());
         return List.of(new SimpleGrantedAuthority(role));
     }
 
