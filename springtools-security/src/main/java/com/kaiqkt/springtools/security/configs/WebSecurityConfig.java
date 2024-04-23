@@ -1,7 +1,8 @@
 package com.kaiqkt.springtools.security.configs;
 
-import com.kaiqkt.springtools.security.filters.AccessDeniedFilter;
 import com.kaiqkt.springtools.security.filters.AuthenticationFilter;
+import com.kaiqkt.springtools.security.handlers.AccessDeniedHandler;
+import com.kaiqkt.springtools.security.handlers.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,18 +14,18 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
 
+import javax.swing.text.html.HTML;
+
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
-    private final AccessDeniedFilter accessDeniedFilter;
 
     @Autowired
-    public WebSecurityConfig(AuthenticationFilter authenticationFilter, AccessDeniedFilter accessDeniedFilter) {
+    public WebSecurityConfig(AuthenticationFilter authenticationFilter) {
         this.authenticationFilter = authenticationFilter;
-        this.accessDeniedFilter = accessDeniedFilter;
     }
 
     @Bean
@@ -33,11 +34,11 @@ public class WebSecurityConfig {
         httpSecurity.cors(AbstractHttpConfigurer::disable);
         httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.securityMatchers(matchers -> matchers.requestMatchers(Companion.PATH_MATCHERS));
+        httpSecurity.exceptionHandling(handling -> handling.accessDeniedHandler(new AccessDeniedHandler()).authenticationEntryPoint(new RestAuthenticationEntryPoint()));
         httpSecurity.authorizeHttpRequests(authRequest ->
                 authRequest.requestMatchers(Companion.PATH_MATCHERS).permitAll().anyRequest().authenticated()
         );
         httpSecurity.addFilterBefore(authenticationFilter, AuthorizationFilter.class);
-        httpSecurity.addFilterAfter(accessDeniedFilter, AccessDeniedFilter.class);
 
         return httpSecurity.build();
     }
