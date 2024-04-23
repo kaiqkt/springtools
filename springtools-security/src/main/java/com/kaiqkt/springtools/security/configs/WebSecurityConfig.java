@@ -2,6 +2,7 @@ package com.kaiqkt.springtools.security.configs;
 
 import com.kaiqkt.springtools.security.filters.AuthenticationFilter;
 import com.kaiqkt.springtools.security.handlers.AuthenticationEntryPointImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ public class WebSecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
 
+    @Autowired
     public WebSecurityConfig(AuthenticationFilter authenticationFilter) {
         this.authenticationFilter =  authenticationFilter;
     }
