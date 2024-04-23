@@ -9,6 +9,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.kaiqkt.springtools.security.dto.Authentication;
 import com.kaiqkt.springtools.security.enums.ErrorType;
 import com.kaiqkt.springtools.security.exceptions.UnauthorizedException;
+import com.kaiqkt.springtools.security.utils.AuthenticationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -21,19 +23,15 @@ import static com.kaiqkt.springtools.security.enums.Roles.ROLE_PUBLIC;
 @Component
 public class AuthenticationHandler {
 
-    @Value("#{${springtools.jwt-secret}}")
-    private String jwtSecret;
+    private final AuthenticationProperties properties;
 
-    @Value("#{${springtools.access-secret}}")
-    private String accessSecret;
-
-    public AuthenticationHandler(String jwtSecret, String accessSecret) {
-        this.jwtSecret = jwtSecret;
-        this.accessSecret = accessSecret;
+    @Autowired
+    public AuthenticationHandler(AuthenticationProperties properties) {
+        this.properties = properties;
     }
 
     public Authentication handleJWTToken(String token) {
-        Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
+        Algorithm algorithm = Algorithm.HMAC256(properties.getJwtSecret());
         JWTVerifier verifier = JWT.require(algorithm).build();
 
         try {
@@ -49,7 +47,7 @@ public class AuthenticationHandler {
     }
 
     public Authentication handleAccessToken(String token) {
-        if (token.equals(accessSecret)) {
+        if (token.equals(properties.getAccessToken())) {
             Map<String, Object> data = new HashMap<>();
             data.put("role", ROLE_API.name());
 

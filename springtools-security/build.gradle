@@ -8,6 +8,7 @@ java {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security:3.2.4")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
     implementation("com.auth0:java-jwt:4.4.0")
     compileOnly("jakarta.servlet:jakarta.servlet-api:5.0.0")
