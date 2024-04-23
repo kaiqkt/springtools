@@ -1,7 +1,7 @@
 package com.kaiqkt.springtools.security.configs;
 
+import com.kaiqkt.springtools.security.filters.AccessDeniedFilter;
 import com.kaiqkt.springtools.security.filters.AuthenticationFilter;
-import com.kaiqkt.springtools.security.handlers.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +19,12 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter;
 public class WebSecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
+    private final AccessDeniedFilter accessDeniedFilter;
 
     @Autowired
-    public WebSecurityConfig(AuthenticationFilter authenticationFilter) {
+    public WebSecurityConfig(AuthenticationFilter authenticationFilter, AccessDeniedFilter accessDeniedFilter) {
         this.authenticationFilter = authenticationFilter;
+        this.accessDeniedFilter = accessDeniedFilter;
     }
 
     @Bean
@@ -35,6 +37,7 @@ public class WebSecurityConfig {
                 authRequest.requestMatchers(Companion.PATH_MATCHERS).permitAll().anyRequest().authenticated()
         );
         httpSecurity.addFilterBefore(authenticationFilter, AuthorizationFilter.class);
+        httpSecurity.addFilterAfter(accessDeniedFilter, AccessDeniedFilter.class);
 
         return httpSecurity.build();
     }
