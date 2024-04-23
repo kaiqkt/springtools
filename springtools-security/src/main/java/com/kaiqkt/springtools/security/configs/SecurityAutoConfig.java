@@ -1,4 +1,4 @@
-package com.kaiqkt.springtools_security.configs;
+package com.kaiqkt.springtools.security.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

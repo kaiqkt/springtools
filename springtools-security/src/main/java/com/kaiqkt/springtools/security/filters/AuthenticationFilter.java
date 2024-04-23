@@ -1,7 +1,7 @@
-package com.kaiqkt.springtools_security.filters;
+package com.kaiqkt.springtools.security.filters;
 
-import com.kaiqkt.springtools_security.dto.Authentication;
-import com.kaiqkt.springtools_security.handlers.AuthenticationHandler;
+import com.kaiqkt.springtools.security.dto.Authentication;
+import com.kaiqkt.springtools.security.handlers.AuthenticationHandler;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

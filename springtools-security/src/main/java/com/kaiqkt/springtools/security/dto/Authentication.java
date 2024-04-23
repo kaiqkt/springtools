@@ -1,4 +1,4 @@
-package com.kaiqkt.springtools_security.dto;
+package com.kaiqkt.springtools.security.dto;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.kaiqkt.springtools_security.enums.Roles.ROLE_PUBLIC;
+import static com.kaiqkt.springtools.security.enums.Roles.ROLE_PUBLIC;
 
 public class Authentication implements org.springframework.security.core.Authentication {
 

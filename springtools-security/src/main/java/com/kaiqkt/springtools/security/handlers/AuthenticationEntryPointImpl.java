@@ -1,8 +1,8 @@
-package com.kaiqkt.springtools_security.handlers;
+package com.kaiqkt.springtools.security.handlers;
 
-import com.kaiqkt.springtools_security.dto.Error;
-import com.kaiqkt.springtools_security.enums.ErrorType;
-import com.kaiqkt.springtools_security.exceptions.UnauthorizedException;
+import com.kaiqkt.springtools.security.dto.Error;
+import com.kaiqkt.springtools.security.enums.ErrorType;
+import com.kaiqkt.springtools.security.exceptions.UnauthorizedException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

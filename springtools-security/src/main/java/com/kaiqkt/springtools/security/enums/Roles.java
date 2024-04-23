@@ -1,4 +1,4 @@
-package com.kaiqkt.springtools_security.enums;
+package com.kaiqkt.springtools.security.enums;
 
 public enum Roles {
     ROLE_API, ROLE_PUBLIC
