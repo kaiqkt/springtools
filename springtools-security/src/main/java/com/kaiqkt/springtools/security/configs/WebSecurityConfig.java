@@ -70,7 +70,7 @@ public class WebSecurityConfig {
             PATH_MATCHERS.add("/webjars/**");
             PATH_MATCHERS.add("/api-docs.yml");
             PATH_MATCHERS.add("/docs");
-            PATH_MATCHERS.add("/health-check");
+            PATH_MATCHERS.add("/health");
         }
 
     }

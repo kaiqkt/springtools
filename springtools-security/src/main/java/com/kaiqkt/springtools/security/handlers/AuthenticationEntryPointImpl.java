@@ -31,6 +31,5 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         response.setContentType("application/json");
         response.getWriter().write(error.toString());
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getOutputStream().flush();
     }
 }
