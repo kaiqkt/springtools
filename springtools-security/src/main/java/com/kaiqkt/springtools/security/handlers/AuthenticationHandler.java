@@ -49,8 +49,6 @@ public class AuthenticationHandler {
     }
 
     public Authentication handleAccessToken(String token) {
-        System.out.println(token);
-        System.out.println(properties.getAccessToken());
         if (token.equals(properties.getAccessToken())) {
             Map<String, Object> data = new HashMap<>();
             data.put("role", ROLE_API.name());
