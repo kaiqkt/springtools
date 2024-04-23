@@ -14,7 +14,7 @@ public class Authentication implements org.springframework.security.core.Authent
 
     private final Map<String, Object> data;
     private final String token;
-    private Boolean authenticated = false;
+    private Boolean authenticated = true;
 
     public Authentication(Map<String, Object> data, String token) {
         this.data = data;
