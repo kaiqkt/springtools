@@ -60,4 +60,13 @@ public class Authentication implements org.springframework.security.core.Authent
     public Map<String, Object> getData() {
         return data;
     }
+
+    @Override
+    public String toString() {
+        return "Authentication{" +
+                "data=" + data +
+                ", token='" + token + '\'' +
+                ", authenticated=" + authenticated +
+                '}';
+    }
 }

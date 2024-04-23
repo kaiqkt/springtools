@@ -33,7 +33,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                         : authenticationHandler.handleAccessToken(t))
                 .orElseGet(authenticationHandler::handlePublic);
 
-        logger.info(authentication);
+        logger.info(authentication.toString());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
