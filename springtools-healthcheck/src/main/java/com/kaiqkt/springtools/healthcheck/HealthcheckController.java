@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController("/healthcheck")
+@RestController
 public class HealthcheckController {
 
     private BuildProperties buildProperties;
 
-    @GetMapping
+    @GetMapping("/healthcheck")
     public ResponseEntity<Map<String, Object>> check(){
         HashMap<String, Object> data = new HashMap<>();
         data.put("application_name", buildProperties.getName());
