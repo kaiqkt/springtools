@@ -22,26 +22,4 @@ allprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter:3.2.4")
     }
-
-    publishing {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/kaiqkt/springtools")
-                credentials {
-                    username = project.findProperty("gpr.user") as String ?: System.getenv("GPR_USER")
-                    password = project.findProperty("gpr.key") as String ?: System.getenv("GPR_API_KEY")
-                }
-            }
-        }
-
-        publications {
-            springtoolsSecurity(MavenPublication) {
-                from(components["java"])
-            }
-            springtoolsHealthcheck(MavenPublication) {
-                from(components["java"])
-            }
-        }
-    }
 }

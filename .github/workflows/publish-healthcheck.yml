@@ -1,9 +1,9 @@
-name: Publish if Version Does Not Exist
+---
 
 on:
   push:
     paths:
-      - 'springtools-security/**'
+      - 'springtools-healthcheck/**'
 
 jobs:
   publish:
@@ -20,4 +20,4 @@ jobs:
         env:
           GPR_USER: ${{ secrets.GPR_USER }}
           GPR_API_KEY: ${{ secrets.GPR_API_KEY }}
-        run: ./gradlew publishSpringtoolsSecurityPublicationToMavenRepository
+        run: ./gradlew publishHealthcheckPublicationToGitHubPackagesRepository

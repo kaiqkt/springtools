@@ -1,4 +1,4 @@
-name: Publish if Version Does Not Exist
+---
 
 on:
   push:
@@ -20,4 +20,4 @@ jobs:
         env:
           GPR_USER: ${{ secrets.GPR_USER }}
           GPR_API_KEY: ${{ secrets.GPR_API_KEY }}
-        run: ./gradlew publishSpringtoolsHealthCheckPublicationToMavenRepository
+        run: ./gradlew publishSecurityPublicationToGitHubPackagesRepository

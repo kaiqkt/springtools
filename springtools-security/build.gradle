@@ -16,3 +16,25 @@ dependencies {
     implementation("com.auth0:java-jwt:4.4.0")
     compileOnly("jakarta.servlet:jakarta.servlet-api:5.0.0")
 }
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kaiqkt/springtools")
+            credentials {
+                username = project.findProperty("gpr.user") as String ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.key") as String ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+
+    publications {
+        security(MavenPublication) {
+            from components.java
+            groupId = 'com.kaiqkt'
+            artifactId = 'springtools-security'
+            version = '1.0.0'
+        }
+    }
+}

@@ -2,9 +2,6 @@ plugins {
     id 'java'
 }
 
-group 'com.kaiqkt'
-version '1.0.0'
-
 repositories {
     mavenCentral()
 }
@@ -14,6 +11,24 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-test {
-    useJUnitPlatform()
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kaiqkt/springtools")
+            credentials {
+                username = project.findProperty("gpr.user") as String ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.key") as String ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+
+    publications {
+        healthcheck(MavenPublication) {
+            from components.java
+            groupId = 'com.kaiqkt'
+            artifactId = 'springtools-healthcheck'
+            version = '1.0.0'
+        }
+    }
 }
