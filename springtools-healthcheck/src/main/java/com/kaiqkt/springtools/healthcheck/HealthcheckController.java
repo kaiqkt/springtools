@@ -1,5 +1,6 @@
 package com.kaiqkt.springtools.healthcheck;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,12 @@ import java.util.Map;
 @RestController
 public class HealthcheckController {
 
-    private BuildProperties buildProperties;
+    private final BuildProperties buildProperties;
+
+    @Autowired
+    public HealthcheckController(BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
+    }
 
     @GetMapping("/healthcheck")
     public ResponseEntity<Map<String, Object>> check(){
