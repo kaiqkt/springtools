@@ -36,9 +36,12 @@ allprojects {
         }
 
         publications {
-			create(MavenPublication) {
-				from(components["java"])
-			}
+            springtoolsSecurity(MavenPublication) {
+                from(components["java"])
+            }
+            springtoolsHealthcheck(MavenPublication) {
+                from(components["java"])
+            }
         }
     }
 }
