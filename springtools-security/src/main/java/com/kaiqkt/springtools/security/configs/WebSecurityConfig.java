@@ -51,7 +51,8 @@ public class WebSecurityConfig {
                 "/webjars/**",
                 "/api-docs.yml",
                 "/docs",
-                "/healthcheck"
+                "/healthcheck",
+                "/metrics"
         };
     }
 }
