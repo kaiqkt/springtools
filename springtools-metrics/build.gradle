@@ -24,7 +24,7 @@ publishing {
     }
 
     publications {
-        security(MavenPublication) {
+        metrics(MavenPublication) {
             from components.java
             groupId = 'com.kaiqkt'
             artifactId = 'springtools-metrics'
