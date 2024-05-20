@@ -1,3 +1,5 @@
 rootProject.name = 'springtools'
 include 'springtools-security'
 include 'springtools-healthcheck'
+include 'springtools-metrics'
+include 'springtools-metrics'
