@@ -2,7 +2,6 @@ package com.kaiqkt.springtools.metrics;
 
 import io.micrometer.core.instrument.*;
 import org.springframework.stereotype.Component;
-
 import java.util.function.Supplier;
 
 @Component
