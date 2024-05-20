@@ -29,7 +29,6 @@ public class Metrics {
         counter.increment(value);
     }
 
-
     // This function creates a Gauge metric.
     // Gauge is a metric that represents a single numerical value that can arbitrarily go up and down.
     public Number gauge(String name, Supplier<Number> supplier, String... tags) {
