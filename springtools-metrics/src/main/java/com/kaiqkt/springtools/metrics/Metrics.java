@@ -21,6 +21,8 @@ public class Metrics {
         counter.increment();
     }
 
+    // This function creates and increments a Counter metric with a given value.
+    // Counter is a simple incrementing and decrementing metric.
     public void increment(String name, double value, String... tags) {
         Counter counter = Counter.builder(name)
                 .tags(tags)
