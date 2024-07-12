@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.kaiqkt.springtools.security.enums.Roles.ROLE_PUBLIC;
 
@@ -27,8 +28,21 @@ public class Authentication implements org.springframework.security.core.Authent
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String role = (String) Optional.ofNullable(data.get("role")).orElse(ROLE_PUBLIC.name());
-        return List.of(new SimpleGrantedAuthority(role));
+        Object rolesObj = data.get("roles");
+        List<String> roles;
+
+        if (rolesObj instanceof List<?>) {
+            roles = ((List<?>) rolesObj).stream()
+                    .filter(String.class::isInstance)
+                    .map(String.class::cast)
+                    .collect(Collectors.toList());
+        } else {
+            roles = List.of(ROLE_PUBLIC.name());
+        }
+
+        return roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     @Override
