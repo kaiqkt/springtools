@@ -36,6 +36,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                     .map(t -> t.startsWith("Bearer ") ? authenticationHandler.handleJWTToken(t.replace("Bearer ", "")) : authenticationHandler.handleAccessToken(t))
                     .orElseGet(authenticationHandler::handlePublic);
 
+            System.out.println(authentication.getAuthorities());
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             filterChain.doFilter(request, response);
         }  catch (AuthenticationException ex) {
