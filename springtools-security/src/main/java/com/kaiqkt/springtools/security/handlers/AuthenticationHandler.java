@@ -38,7 +38,7 @@ public class AuthenticationHandler {
 
         try {
             DecodedJWT decodedToken = verifier.verify(token);
-            Map<String, Object> data = new HashMap<>();
+            Map<String, Object> data = new HashMap<>(decodedToken.getClaims());
 
             return new Authentication(data, decodedToken.getToken());
         } catch (TokenExpiredException ex) {

@@ -29,6 +29,7 @@ public class Authentication implements org.springframework.security.core.Authent
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Object rolesObj = data.get("roles");
         System.out.println(data);
+        System.out.println("rolesObj class: " + (rolesObj != null ? rolesObj.getClass().getName() : "null"));
         List<String> roles;
 
         if (rolesObj instanceof List<?>) {
