@@ -31,11 +31,13 @@ public class Authentication implements org.springframework.security.core.Authent
         List<String> roles;
 
         if (rolesObj instanceof List<?>) {
+            System.out.println("My roles");
             roles = ((List<?>) rolesObj).stream()
                     .filter(String.class::isInstance)
                     .map(String.class::cast)
                     .collect(Collectors.toList());
         } else {
+            System.out.println("Public roles");
             roles = List.of(ROLE_PUBLIC.name());
         }
 
