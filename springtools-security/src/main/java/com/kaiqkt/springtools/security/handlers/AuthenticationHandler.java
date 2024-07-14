@@ -15,6 +15,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.kaiqkt.springtools.security.enums.Roles.ROLE_API;
@@ -37,7 +38,7 @@ public class AuthenticationHandler {
 
         try {
             DecodedJWT decodedToken = verifier.verify(token);
-            Map<String, Object> data = new HashMap<>(decodedToken.getClaims());
+            Map<String, Object> data = new HashMap<>();
 
             return new Authentication(data, decodedToken.getToken());
         } catch (TokenExpiredException ex) {
@@ -50,7 +51,7 @@ public class AuthenticationHandler {
     public Authentication handleAccessToken(String token) {
         if (token.equals(properties.getAccessToken())) {
             Map<String, Object> data = new HashMap<>();
-            data.put("role", ROLE_API.name());
+            data.put("roles", List.of(ROLE_API.name()));
 
             return new Authentication(data);
         }
@@ -58,9 +59,9 @@ public class AuthenticationHandler {
         throw new UnauthorizedException("Invalid Access Token", ErrorType.INVALID_TOKEN);
     }
 
-    public Authentication handlePublic(){
+    public Authentication handlePublic() {
         Map<String, Object> data = new HashMap<>();
-        data.put("role", ROLE_PUBLIC.name());
+        data.put("roles", List.of(ROLE_PUBLIC.name()));
 
         return new Authentication(data);
     }
