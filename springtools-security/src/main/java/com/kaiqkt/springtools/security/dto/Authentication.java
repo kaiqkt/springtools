@@ -27,19 +27,18 @@ public class Authentication implements org.springframework.security.core.Authent
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<String> roles = (List<String>) data.get("roles");
-//        List<String> roles;
+        System.out.println(data.get("roles"));
+        Object rolesObj = data.get("roles");
+        List<String> roles;
 
-//        if (rolesObj instanceof List<?>) {
-//            System.out.println("My roles");
-//            roles = ((List<?>) rolesObj).stream()
-//                    .filter(String.class::isInstance)
-//                    .map(String.class::cast)
-//                    .collect(Collectors.toList());
-//        } else {
-//            System.out.println("Public roles");
-//            roles = List.of(ROLE_PUBLIC.name());
-//        }
+        if (rolesObj instanceof List<?>) {
+            roles = ((List<?>) rolesObj).stream()
+                    .filter(String.class::isInstance)
+                    .map(String.class::cast)
+                    .collect(Collectors.toList());
+        } else {
+            roles = List.of(ROLE_PUBLIC.name());
+        }
 
         return roles.stream()
                 .map(SimpleGrantedAuthority::new)
