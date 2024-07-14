@@ -32,6 +32,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
+            System.out.println(Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION)));
             Authentication authentication = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
                     .map(t -> t.startsWith("Bearer ") ? authenticationHandler.handleJWTToken(t.replace("Bearer ", "")) : authenticationHandler.handleAccessToken(t))
                     .orElseGet(authenticationHandler::handlePublic);

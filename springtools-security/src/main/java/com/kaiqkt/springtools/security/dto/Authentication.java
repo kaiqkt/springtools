@@ -78,6 +78,22 @@ public class Authentication implements org.springframework.security.core.Authent
         return data;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Boolean getAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(Boolean authenticated) {
+        this.authenticated = authenticated;
+    }
+
     @Override
     public String toString() {
         return "Authentication{" +
