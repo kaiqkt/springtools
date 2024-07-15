@@ -1,8 +1,10 @@
 package com.kaiqkt.springtools.security.dto;
 
+import com.auth0.jwt.interfaces.Claim;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -27,23 +29,12 @@ public class Authentication implements org.springframework.security.core.Authent
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Object rolesObj = data.get("roles");
-        System.out.println(data);
-        System.out.println("rolesObj class: " + (rolesObj != null ? rolesObj.getClass().getName() : "null"));
-        List<String> roles;
-
-        if (rolesObj instanceof List<?>) {
-            roles = ((List<?>) rolesObj).stream()
-                    .filter(String.class::isInstance)
-                    .map(String.class::cast)
-                    .collect(Collectors.toList());
-        } else {
-            roles = List.of(ROLE_PUBLIC.name());
+        Object roles = data.get("roles");
+        if (roles instanceof Claim) {
+            System.out.println(((Claim) roles).asList(String.class));
         }
 
-        return roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        return List.of(new SimpleGrantedAuthority(ROLE_PUBLIC.name()));
     }
 
     @Override
@@ -76,7 +67,7 @@ public class Authentication implements org.springframework.security.core.Authent
         return "PRINCIPAL";
     }
 
-    public Map<String, Object> getData() {
+    public  Map<String, Object> getData() {
         return data;
     }
 
