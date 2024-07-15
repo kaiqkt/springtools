@@ -11,13 +11,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Context {
-    public static <T> Optional<T> getValue(String key, Class<T> T) {
+    public static <T> T getValue(String key, Class<T> T) {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = (Authentication) context.getAuthentication();
         Claim claim = (Claim) authentication.getData().get(key);
 
         if (claim != null) {
-            return Optional.ofNullable(claim.as(T));
+            return claim.as(T);
         }
 
         throw new UnauthorizedException("Invalid JWT Token", ErrorType.INVALID_TOKEN);
